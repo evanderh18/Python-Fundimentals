@@ -6,26 +6,38 @@ import random
 
 #ask the suer to select the upper bound
 #ask the user to guess
-upper_bound = input("What is the upper bound? ")
-upper_bound = int(upper_bound)
+invalid_upper_bound = True
+
+while invalid_upper_bound:
+    upper_bound = input("What is the upper bound? ")
+    if upper_bound.isdigit():
+        upper_bound = int(upper_bound)
+        invalid_upper_bound = False
+    else:
+        print('That is not a valid input')
 
 # generate a random interger starting at 1 and going to upper_bound
 random_number = random.randint(1, upper_bound)
 print(random_number)
 
-user_guess = None
+user_guess = 0
+number_of_guesses = 1
 
 while user_guess != random_number:
 
     user_guess = input("Enter guess between 1 and " + str(upper_bound) + ": ")
+    
+    if user_guess.isdigit():
+        user_guess = int(user_guess)
 
-    #check if user guess is equal to random number
 
-    if int(user_guess) == random_number:
+    if user_guess == random_number:
         print("You win")
     else:
         print("Mission failed, we'll get them next time")
-print("Game Over")
+        number_of_guesses += 1
+    
+print("Game Over you took " + str(number_of_guesses) + " guesses")
 # high_range = 100
 # middle_number = int(high_range/2)
 # my_guess = middle_number
